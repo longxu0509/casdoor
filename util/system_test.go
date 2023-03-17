@@ -40,7 +40,7 @@ func TestGetMemoryUsage(t *testing.T) {
 	t.Log(used, total)
 }
 
-func TestGetVersionInfo(t *testing.T) {
+func TestGetGitRepoVersion(t *testing.T) {
 	versionInfo, err := GetVersionInfo()
 	assert.Nil(t, err)
 	t.Log(versionInfo)
