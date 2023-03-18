@@ -112,9 +112,9 @@ jobs:
           working-directory: ./web
           wait-on: 'http://localhost:7001'
           wait-on-timeout: 180
-      - name: Call Go API
-        run: curl http://localhost:8000/api/get-version-info > ./version_info.txt
-
+#      - name: Call Go API
+#        run: curl http://localhost:8000/api/get-version-info > ./version_info.txt
+#        working-directory: ./web
       - uses: actions/upload-artifact@v3
         if: failure()
         with:
