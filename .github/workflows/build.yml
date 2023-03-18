@@ -129,7 +129,7 @@ jobs:
   release-and-push:
     name: Release And Push
     runs-on: ubuntu-latest
-    if: github.repository == 'longxu0509/casdoor' && github.event_name == 'push'
+#    if: github.repository == 'longxu0509/casdoor' && github.event_name == 'push'
     needs: [ frontend, backend, linter, e2e ]
     steps:
       - name: Checkout
