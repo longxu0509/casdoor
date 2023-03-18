@@ -97,11 +97,11 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 16
-      - name: Run tests
-        run: go test -v -run TestGetVersionInfo .\util\
       - name: back start
         run: nohup go run ./main.go &
         working-directory: ./
+      - name: Call Go API
+        run: curl http://localhost:8000/api/get-version-info > ./version_info.txt
       - name: front install
         run: yarn install
         working-directory: ./web
