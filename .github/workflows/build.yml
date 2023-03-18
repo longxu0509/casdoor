@@ -100,8 +100,7 @@ jobs:
       - name: back start
         run: nohup go run ./main.go &
         working-directory: ./
-      - name: Call Go API
-        run: curl http://localhost:8000/api/get-version-info > ./version_info.txt
+
       - name: front install
         run: yarn install
         working-directory: ./web
@@ -113,6 +112,8 @@ jobs:
           working-directory: ./web
           wait-on: 'http://localhost:7001'
           wait-on-timeout: 180
+      - name: Call Go API
+        run: curl http://localhost:8000/api/get-version-info > ./version_info.txt
 
       - uses: actions/upload-artifact@v3
         if: failure()
