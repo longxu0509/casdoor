@@ -6,8 +6,10 @@ RUN yarn install --frozen-lockfile --network-timeout 1000000 && yarn run build
 
 
 FROM golang:1.17.5 AS BACK
+RUN ls -al
 WORKDIR /go/src/casdoor
 COPY . .
+RUN ls -al
 RUN ./build.sh
 
 
