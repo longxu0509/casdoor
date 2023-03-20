@@ -16,9 +16,9 @@ package util
 
 import (
 	"bufio"
-	"fmt"
 	"os"
 	"path"
+	"regexp"
 	"runtime"
 	"strconv"
 	"strings"
@@ -161,27 +161,44 @@ func GetVersionInfoFromFile() (*VersionInfo, error) {
 	}
 	defer file.Close()
 
+	//scanner := bufio.NewScanner(file)
+	//var versionInfo string
+	//for scanner.Scan() {
+	//	versionInfo = fmt.Sprintf("%s", scanner.Text())
+	//}
+	//split := strings.Split(versionInfo, " ")
+	//version := split[0]
+	//commitId := split[1]
+	//commitOffset, err := strconv.Atoi(split[2])
+	//if err != nil {
+	//	return res, err
+	//}
+
+	// 逐行读取文件内容
 	scanner := bufio.NewScanner(file)
-	var versionInfo string
+
 	for scanner.Scan() {
-		versionInfo = fmt.Sprintf("%s", scanner.Text())
-	}
-	split := strings.Split(versionInfo, " ")
-	version := split[0]
-	commitId := split[1]
-	commitOffset, err := strconv.Atoi(split[2])
-	if err != nil {
-		return res, err
+		// 使用正则表达式匹配字符串
+		re := regexp.MustCompile(`\{([^{}]+)\}`)
+		versionInfo := scanner.Text()
+		matches := re.FindStringSubmatch(versionInfo)
+		if len(matches) > 1 {
+			split := strings.Split(matches[1], " ")
+			version := split[0]
+			commitId := split[1]
+			commitOffset, _ := strconv.Atoi(split[2])
+			res = &VersionInfo{
+				Version:      version,
+				CommitId:     commitId,
+				CommitOffset: commitOffset,
+			}
+			break
+		}
 	}
 
 	if err := scanner.Err(); err != nil {
 		return res, err
 	}
 
-	res = &VersionInfo{
-		Version:      version,
-		CommitId:     commitId,
-		CommitOffset: commitOffset,
-	}
 	return res, nil
 }
