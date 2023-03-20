@@ -48,6 +48,8 @@ jobs:
     needs: [ go-tests ]
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: -1
       - uses: actions/setup-go@v2
         with:
           go-version: '^1.16.5'
@@ -195,7 +197,7 @@ jobs:
         uses: docker/build-push-action@v3
 #        if: github.repository == 'longxu0509/casdoor' && github.event_name == 'push' && steps.should_push.outputs.push=='true'
         with:
-          submodules: 'recursive'
+          context: .
           target: STANDARD
           platforms: linux/amd64,linux/arm64
           push: true
