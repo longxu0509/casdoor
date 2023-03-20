@@ -195,6 +195,7 @@ jobs:
         uses: docker/build-push-action@v3
 #        if: github.repository == 'longxu0509/casdoor' && github.event_name == 'push' && steps.should_push.outputs.push=='true'
         with:
+          submodules: 'recursive'
           target: STANDARD
           platforms: linux/amd64,linux/arm64
           push: true
