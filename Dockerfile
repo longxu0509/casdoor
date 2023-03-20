@@ -11,7 +11,7 @@ WORKDIR /go/src/casdoor
 COPY . .
 RUN ls -al
 RUN ./build.sh
-RUN go test -v -run TestGetVersionInfo ./util/system_test.go ./util/system.go | grep -oE  "v[0-9]+.[0-9]+.[0-9]+\s+[0-9a-f]+\s+[0-9]+" > version_info.txt
+RUN go test -v -run TestGetVersionInfo ./util/system_test.go ./util/system.go | grep -oE  "v[0-9]+.[0-9]+.[0-9]+\s+[0-9a-f]+\s+[0-9]+"
 
 
 FROM alpine:latest AS STANDARD
