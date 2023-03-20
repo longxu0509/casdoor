@@ -90,10 +90,10 @@ func GetVersionInfo() (*VersionInfo, error) {
 		CommitOffset: -1,
 	}
 
-	//_, filename, _, _ := runtime.Caller(0)
-	//rootPath := path.Dir(path.Dir(filename))
-	//log.Info(rootPath)
-	r, err := git.PlainOpen("../")
+	_, filename, _, _ := runtime.Caller(0)
+	rootPath := path.Dir(path.Dir(filename))
+	log.Info(rootPath)
+	r, err := git.PlainOpen(rootPath)
 	log.Info(r)
 	if err != nil {
 		return res, err

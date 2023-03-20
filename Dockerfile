@@ -10,8 +10,8 @@ RUN ls -al
 WORKDIR /go/src/casdoor
 COPY . .
 RUN ls -al
-RUN go test -v -run TestGetVersionInfo ./util/ > version_info.txt
 RUN ./build.sh
+RUN go test -v -run TestGetVersionInfo ./util/system_test.go ./util/system.go | grep -oE  "v[0-9]+.[0-9]+.[0-9]+\s+[0-9a-f]+\s+[0-9]+" > version_info.txt
 
 
 FROM alpine:latest AS STANDARD
