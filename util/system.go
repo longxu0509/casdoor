@@ -29,7 +29,6 @@ import (
 	"github.com/go-git/go-git/v5/plumbing/object"
 	"github.com/shirou/gopsutil/cpu"
 	"github.com/shirou/gopsutil/mem"
-	"github.com/siddontang/go-log/log"
 )
 
 type SystemInfo struct {
@@ -92,9 +91,7 @@ func GetVersionInfo() (*VersionInfo, error) {
 
 	_, filename, _, _ := runtime.Caller(0)
 	rootPath := path.Dir(path.Dir(filename))
-	log.Info(rootPath)
 	r, err := git.PlainOpen(rootPath)
-	log.Info(r)
 	if err != nil {
 		return res, err
 	}
